@@ -21,3 +21,12 @@ class RandomQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ["title", "answer",]
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    answer = AnswerSerializer(many=True, read_only=True)
+    quiz = QuizSerializer(read_only=True)
+
+    class Meta:
+        model = Question
+        fields = ["quiz", "title", "answer",]
