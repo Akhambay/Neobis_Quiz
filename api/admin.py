@@ -13,6 +13,11 @@ class QuizAdmin(admin.ModelAdmin):
     list_display = ["id", "title",]
 
 
+@admin.register(models.Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ["id", "title",]
+
+
 class AnswerInlineModel(admin.TabularInline):
     model = models.Answer
     fields = ["answer_text", "is_right",]
