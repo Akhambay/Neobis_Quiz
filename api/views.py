@@ -1,4 +1,4 @@
-from .serializers import QuizSerializer, RandomQuestionSerializer, QuestionSerializer, ArticleSerializer
+from .serializers import QuizSerializer, QuestionSerializer, ArticleSerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from .models import Quiz, Question, Article
@@ -20,16 +20,10 @@ class ArticleDetailedView(generics.RetrieveAPIView):
     serializer_class = ArticleSerializer
 
 
-class RandomQuestion(APIView):
-    def get(self, request, format=None, **kwargs):
-        quiz_title = kwargs['topic']
-        question = Question.objects.filter(
-            quiz__title=quiz_title).order_by('?')[:1]
-        serializer = RandomQuestionSerializer(question, many=True)
-        return Response(serializer.data)
-
-
 class QuizQuestion(APIView):
+    serializer_class = QuestionSerializer
+    queryset = Question.objects.all()
+
     def get(self, request, format=None, **kwargs):
         quiz_title = kwargs['topic']
         question = Question.objects.filter(

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'corsheaders',
-    '"drf_spectacular',
+    'drf_spectacular',
 ]
 
 CORS_ALLOWED_ORIGINS = (
@@ -48,8 +48,8 @@ CORS_ALLOWED_ORIGINS = (
     'https://pavel-backender.org.kg',
 )
 
-CSRF_TRUSTED_ORIGINS = ["localhost:3000",
-                        "localhost:8000", 'pavel-backender.org.kg']
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000",
+                        "http://localhost:8000", 'https://pavel-backender.org.kg']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,6 +61,23 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "API Project #9",
+    "DESCRIPTION": "Final project. Consists of quizzes and articles",
+    "VERSION": "1.0.0",
+}
 
 ROOT_URLCONF = 'quiz_config.urls'
 
