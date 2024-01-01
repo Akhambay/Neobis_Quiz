@@ -17,8 +17,8 @@ class Quiz(models.Model):
         verbose_name_plural = _("Quizzes")
         ordering = ['id']
 
-    title = models.ForeignKey(max_length=255, default=_(
-        "New Quiz"), verbose_name="Quiz Title")
+    title = models.CharField(max_length=255, default=_(
+        "New Quiz"), verbose_name=_("Quiz Title"))
     category = models.ForeignKey(
         Category, default=1, on_delete=models.DO_NOTHING)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -75,7 +75,7 @@ class Article(Updated):
         verbose_name_plural = _("Articles")
         ordering = ['id']
 
-    title = models.ForeignKey(max_length=255, default=_(
+    title = models.CharField(max_length=255, default=_(
         "New article"), verbose_name="Article Title")
     content = models.TextField(
         max_length=500, verbose_name=_("Article Text"))
