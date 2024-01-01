@@ -75,19 +75,20 @@ class Answer(Updated):
         return self.answer_text
 
 
-class Article(Updated):
+class Article(models.Model):
 
     class Meta:
         verbose_name = _("Article")
         verbose_name_plural = _("Articles")
         ordering = ['id']
 
-    title = models.CharField(max_length=255, default=_(
-        "New article"), verbose_name="Article Title")
-    content = models.TextField(
-        max_length=500, verbose_name=_("Article Text"))
+    title = models.CharField(max_length=255, default="New article")
+    content = models.TextField(max_length=500)
     category = models.ForeignKey(
         Category, default=1, on_delete=models.DO_NOTHING)
     date_created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(
-        default=False, verbose_name=_("Active status"))
+        default=True, verbose_name=_("Active status"))
+
+    def __str__(self):
+        return self.title

@@ -1,11 +1,13 @@
 from django.urls import path
-from .views import Quiz, RandomQuestion, QuizQuestion
+from .views import QuizListView, RandomQuestion, QuizQuestion, ArticleListView, ArticleDetailedView
 
 
 app_name = 'api'
 
 urlpatterns = [
-    path('', Quiz.as_view(), name='quiz'),
-    path('r/<str:topic>/', RandomQuestion.as_view(), name='random'),
-    path('q/<str:topic>/', QuizQuestion.as_view(), name='question'),
+    path('quizzes/', QuizListView.as_view(), name='quiz'),
+    path('articles/', ArticleListView.as_view(), name='article'),
+    path('articles/<int:pk>/', ArticleDetailedView.as_view(), name='article-detail'),
+    path('quizzes/r/<str:topic>/', RandomQuestion.as_view(), name='random'),
+    path('quizzes/q/<str:topic>/', QuizQuestion.as_view(), name='question'),
 ]
