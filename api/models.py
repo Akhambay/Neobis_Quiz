@@ -27,6 +27,9 @@ class Quiz(models.Model):
         Category, default=1, on_delete=models.DO_NOTHING)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def get_question_count(self):
+        return self.question.count()
+
     def __str__(self):
         return self.title
 
@@ -86,6 +89,7 @@ class Article(models.Model):
     content = models.TextField(max_length=500)
     category = models.ForeignKey(
         Category, default=1, on_delete=models.DO_NOTHING)
+    time_to_read = models.PositiveIntegerField(default=10)  # in minutes
     date_created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(
         default=True, verbose_name=_("Active status"))
