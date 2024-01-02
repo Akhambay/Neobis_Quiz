@@ -9,10 +9,24 @@ class QuizListView(generics.ListAPIView):
     serializer_class = QuizSerializer
     queryset = Quiz.objects.all()
 
+    def get_queryset(self):
+        category_id = self.request.query_params.get('category')
+        if category_id:
+            return Quiz.objects.filter(category_id=category_id)
+        else:
+            return Quiz.objects.all()
+
 
 class ArticleListView(generics.ListAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
+
+    def get_queryset(self):
+        category_id = self.request.query_params.get('category')
+        if category_id:
+            return Article.objects.filter(category_id=category_id)
+        else:
+            return Article.objects.all()
 
 
 class ArticleDetailedView(generics.RetrieveAPIView):
