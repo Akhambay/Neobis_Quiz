@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0fki5ogo^hy89*n0css-#98-(2=ks-c_p=a1@1*8s3s)egj960
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://tokyo-backender.org.kg/",
+ALLOWED_HOSTS = ["tokyo-backender.org.kg",
                  "localhost", "127.0.0.1", "161.35.201.242"]
 
 # Application definition
