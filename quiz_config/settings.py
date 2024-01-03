@@ -29,8 +29,6 @@ DEBUG = True
 ALLOWED_HOSTS = ["tokyo-backender.org.kg",
                  "localhost", "127.0.0.1", "161.35.201.242"]
 
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,11 +45,11 @@ INSTALLED_APPS = [
 CORS_ALLOWED_ORIGINS = (
     "http://localhost:3000",
     "http://localhost:8000",
-    'https://pavel-backender.org.kg',
+    'https://tokyo-backender.org.kg',
 )
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000",
-                        "http://localhost:8000", 'https://pavel-backender.org.kg']
+                        "http://localhost:8000", 'https://tokyo-backender.org.kg']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
