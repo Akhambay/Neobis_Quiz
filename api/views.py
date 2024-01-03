@@ -24,7 +24,7 @@ class ArticleListView(generics.ListAPIView):
     def get_queryset(self):
         category_id = self.request.query_params.get('category')
         if category_id:
-            return Article.objects.filter(category_id=category_id)
+            return Article.objects.filter(category_id=category_id, is_active=True)
         else:
             return Article.objects.all()
 
