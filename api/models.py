@@ -33,6 +33,11 @@ class Quiz(models.Model):
     def get_question_count(self):
         return self.question.count()
 
+    def get_user_quiz_progress(self, user_answers):
+        total_questions = self.get_question_count()
+        correct_answers = sum(user_answers.values_list('is_right', flat=True))
+        return correct_answers, total_questions
+
     def __str__(self):
         return self.title
 

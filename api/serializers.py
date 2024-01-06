@@ -17,7 +17,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quiz
-        fields = ["title", ]
+        fields = ["title", "quiz_cover",]
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -34,3 +34,8 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ["quiz", "title", "answer",]
+
+
+class QuizProgressSerializer(serializers.Serializer):
+    total_questions = serializers.IntegerField()
+    correct_answers = serializers.IntegerField()
