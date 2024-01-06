@@ -28,7 +28,9 @@ class Quiz(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
     quiz_cover = models.ImageField(
-        null=True, blank=True, default='/quiz_pics/default.jpg', upload_to='quiz_pics')
+        null=True, blank=True, default='/quiz_pics/default.png', upload_to='quiz_pics')
+    welcome_page = models.TextField(max_length=500, default=_(
+        "Добро пожаловать на квиз по _____. Погрузитесь в захватывающий мир идей, вопросов и философских течений, которые формировали наше понимание мира и сущности бытия. В этом квизе вы пройдете через века мысли, от великих философов до ключевых философских концепций. Готовьтесь к увлекательному путешествию в мир философии и глубоких размышлений!"), verbose_name="Quiz first page")
 
     def get_question_count(self):
         return self.question.count()
@@ -99,7 +101,7 @@ class Article(models.Model):
         Category, default=1, on_delete=models.DO_NOTHING)
     time_to_read = models.PositiveIntegerField(default=10)  # in minutes
     article_cover = models.ImageField(
-        null=True, blank=True, default='/article_pics/default.jpg', upload_to='article_pics')
+        null=True, blank=True, default='/article_pics/default.png', upload_to='article_pics')
     date_created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(
         default=True, verbose_name=_("Active status"))

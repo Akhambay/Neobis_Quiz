@@ -1,4 +1,4 @@
-from .serializers import QuizSerializer, QuestionSerializer, ArticleSerializer, QuizProgressSerializer
+from .serializers import QuizSerializer, QuestionSerializer, ArticleSerializer, QuizProgressSerializer, QuizWelcomePageSerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from .models import Quiz, Question, Article, Answer
@@ -33,6 +33,11 @@ class ArticleListView(generics.ListAPIView):
 class ArticleDetailedView(generics.RetrieveAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+
+
+class QuizWelcomePageView(generics.ListAPIView):
+    queryset = Quiz.objects.all()
+    serializer_class = QuizWelcomePageSerializer
 
 
 class QuizQuestion(APIView):

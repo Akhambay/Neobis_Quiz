@@ -1,13 +1,15 @@
 from django.urls import path
-from .views import QuizListView, QuizQuestion, ArticleListView, ArticleDetailedView, QuizProgressView
+from .views import QuizListView, QuizQuestion, ArticleListView, ArticleDetailedView, QuizProgressView, QuizWelcomePageView
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 app_name = 'api'
 
 urlpatterns = [
-    path('quizzes/', QuizListView.as_view(), name='quiz'),
     path('articles/', ArticleListView.as_view(), name='article'),
     path('articles/<int:pk>/', ArticleDetailedView.as_view(), name='article-detail'),
+    path('quizzes/', QuizListView.as_view(), name='quiz'),
+    path('quizzes/<int:quiz_id>/welcome/',
+         QuizWelcomePageView.as_view(), name='quiz_welcome_page'),
     path('quizzes/<int:quiz_id>/questions/',
          QuizQuestion.as_view(), name='question'),
     path('quizzes/<int:quiz_id>/progress/',

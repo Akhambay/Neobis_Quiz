@@ -15,9 +15,20 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class QuizSerializer(serializers.ModelSerializer):
+    total_questions = serializers.SerializerMethodField()
+
     class Meta:
         model = Quiz
-        fields = ["title", "quiz_cover",]
+        fields = ["id", "title", "quiz_cover", "total_questions", "category"]
+
+    def get_total_questions(self, obj):
+        return obj.get_question_count()
+
+
+class QuizWelcomePageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = ["id", "title", "quiz_cover", "welcome_page"]
 
 
 class AnswerSerializer(serializers.ModelSerializer):
