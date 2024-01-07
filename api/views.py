@@ -32,11 +32,19 @@ class ArticleDetailedView(generics.RetrieveAPIView):
     serializer_class = ArticleSerializer
 
 
+class QuizFilter(django_filters.FilterSet):
+    category = filters.AllValuesMultipleFilter(field_name='category__id')
+
+    class Meta:
+        model = Quiz
+        fields = ['category']
+
+
 class QuizListView(generics.ListAPIView):
     serializer_class = QuizSerializer
     queryset = Quiz.objects.all()
     filter_backends = [DjangoFilterBackend]
-    filterset_class = ArticleFilter
+    filterset_class = QuizFilter
 
     def get_queryset(self):
         return super().get_queryset()
