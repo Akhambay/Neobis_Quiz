@@ -4,35 +4,42 @@ from rest_framework.response import Response
 from .models import Quiz, Question, Article, Answer
 from rest_framework.views import APIView
 from rest_framework import status
+from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import rest_framework as filters
+import django_filters
 
 
-class QuizListView(generics.ListAPIView):
-    serializer_class = QuizSerializer
-    queryset = Quiz.objects.all()
+class ArticleFilter(django_filters.FilterSet):
+    category = filters.AllValuesMultipleFilter(field_name='category__id')
 
-    def get_queryset(self):
-        category_id = self.request.query_params.get('category')
-        if category_id:
-            return Quiz.objects.filter(category_id=category_id)
-        else:
-            return Quiz.objects.all()
+    class Meta:
+        model = Article
+        fields = ['category']
 
 
 class ArticleListView(generics.ListAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ArticleFilter
 
     def get_queryset(self):
-        category_id = self.request.query_params.get('category')
-        if category_id:
-            return Article.objects.filter(category_id=category_id, is_active=True)
-        else:
-            return Article.objects.all()
+        return super().get_queryset()
 
 
 class ArticleDetailedView(generics.RetrieveAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+
+
+class QuizListView(generics.ListAPIView):
+    serializer_class = QuizSerializer
+    queryset = Quiz.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ArticleFilter
+
+    def get_queryset(self):
+        return super().get_queryset()
 
 
 class QuizWelcomePageView(generics.ListAPIView):

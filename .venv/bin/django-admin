@@ -1,4 +1,4 @@
-#!/Users/Korlan/Desktop/projects/quiz/.venv/bin/python3
+#!/Users/Korlan/Desktop/projects/quiz/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
