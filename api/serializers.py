@@ -5,16 +5,20 @@ from .models import Quiz, Question, Answer, Article, Category
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ["name",]
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
     class Meta:
         model = Article
-        fields = '__all__'
+        fields = ["id", "title", "content", "is_active",
+                  'time_to_read', "article_cover", "category",]
 
 
 class QuizSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
     total_questions = serializers.SerializerMethodField()
 
     class Meta:

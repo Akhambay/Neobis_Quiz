@@ -24,7 +24,7 @@ class Quiz(models.Model):
     title = models.CharField(max_length=255, default=_(
         "New Quiz"), verbose_name=_("Quiz Title"))
     category = models.ForeignKey(
-        Category, default=1, on_delete=models.DO_NOTHING)
+        Category, default=1, on_delete=models.CASCADE)
 
     date_created = models.DateTimeField(auto_now_add=True)
     quiz_cover = models.ImageField(
