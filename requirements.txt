@@ -6,7 +6,7 @@ cloudinary==1.37.0
 Django==4.2
 django-cloudinary-storage==0.3.0
 django-cors-headers==3.10.1
-django-filter==23.5
+django-filter
 djangorestframework==3.14.0
 djangorestframework-filters==0.11.1
 drf-spectacular==0.24.2
