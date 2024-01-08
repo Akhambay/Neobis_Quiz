@@ -77,10 +77,6 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 12,
 }
 
-REST_FRAMEWORK = {
-
-}
-
 SPECTACULAR_SETTINGS = {
     "TITLE": "API Project #9",
     "DESCRIPTION": "Final project. Consists of quizzes and articles",

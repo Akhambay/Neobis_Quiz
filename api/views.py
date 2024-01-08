@@ -18,6 +18,12 @@ class ArticleFilter(django_filters.FilterSet):
         fields = ['category']
 
 
+class ArticlePagination(PageNumberPagination):
+    page_size = 12
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
 class ArticleListView(generics.ListAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
