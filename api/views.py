@@ -7,6 +7,7 @@ from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 import django_filters
+from rest_framework.pagination import PageNumberPagination
 
 
 class ArticleFilter(django_filters.FilterSet):
@@ -22,6 +23,7 @@ class ArticleListView(generics.ListAPIView):
     queryset = Article.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_class = ArticleFilter
+    pagination_class = PageNumberPagination
 
     def get_queryset(self):
         return super().get_queryset()
