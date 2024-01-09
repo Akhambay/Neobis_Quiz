@@ -24,6 +24,14 @@ class ArticlePagination(PageNumberPagination):
     max_page_size = 100
 
 
+class ArticleListByCategory(generics.ListAPIView):
+    serializer_class = ArticleSerializer
+
+    def get_queryset(self):
+        category = self.kwargs['category']
+        return Article.objects.filter(category=category)
+
+
 class ArticleListView(generics.ListAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
@@ -56,6 +64,14 @@ class QuizListView(generics.ListAPIView):
 
     def get_queryset(self):
         return super().get_queryset()
+
+
+class QuizListByCategory(generics.ListAPIView):
+    serializer_class = QuizSerializer
+
+    def get_queryset(self):
+        category = self.kwargs['category']
+        return Quiz.objects.filter(category=category)
 
 
 class QuizWelcomePageView(generics.ListAPIView):
