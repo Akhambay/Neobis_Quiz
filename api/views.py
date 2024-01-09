@@ -59,8 +59,19 @@ class QuizListView(generics.ListAPIView):
 
 
 class QuizWelcomePageView(generics.ListAPIView):
-    queryset = Quiz.objects.all()
-    serializer_class = QuizWelcomePageSerializer
+    def get(self, request, quiz_id=None, format=None):
+        if quiz_id is not None:
+            try:
+                quiz = Quiz.objects.get(pk=quiz_id)
+            except Quiz.DoesNotExist:
+                return Response({"error": "Quiz not found"}, status=404)
+
+            serializer = QuizWelcomePageSerializer(quiz)
+        else:
+            quizzes = Quiz.objects.all()
+            serializer = QuizWelcomePageSerializer(quizzes, many=True)
+
+        return Response(serializer.data)
 
 
 class QuizQuestion(APIView):
