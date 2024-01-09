@@ -8,14 +8,24 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 import django_filters
 from rest_framework.pagination import PageNumberPagination
+from rest_framework import filters as s_filters
+from django.db.models import Q
+# 111
 
 
 class ArticleFilter(django_filters.FilterSet):
     category = filters.AllValuesMultipleFilter(field_name='category__id')
+    search = s_filters.SearchFilter()
 
     class Meta:
         model = Article
         fields = ['category']
+
+    def custom_search(self, queryset, name, value):
+        return queryset.filter(
+            Q(title__icontains=value) |
+            Q(content__icontains=value)
+        )
 
 
 class ArticlePagination(PageNumberPagination):
@@ -35,7 +45,8 @@ class ArticleListByCategory(generics.ListAPIView):
 class ArticleListView(generics.ListAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, s_filters.SearchFilter]
+    search_fields = ['title', 'content', 'category__name']
     filterset_class = ArticleFilter
     pagination_class = PageNumberPagination
 
