@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0fki5ogo^hy89*n0css-#98-(2=ks-c_p=a1@1*8s3s)egj960
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["tokyo-backender.org.kg",
+ALLOWED_HOSTS = ["tokyo-backender.org.kg", "https://neo-quiz.vercel.app",
                  "localhost", "127.0.0.1", "161.35.201.242"]
 
 INSTALLED_APPS = [
@@ -48,10 +48,11 @@ CORS_ALLOWED_ORIGINS = (
     'http://localhost:8000',
     'https://tokyo-backender.org.kg',
     'http://localhost:5173',
+    'https://neo-quiz.vercel.app',
 )
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://localhost:5173',
-                        'http://localhost:8000', 'https://tokyo-backender.org.kg',]
+                        'http://localhost:8000', 'https://tokyo-backender.org.kg', 'https://neo-quiz.vercel.app',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
